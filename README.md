@@ -16,8 +16,26 @@ A cloud-oriented e-commerce platform demo featuring multi-role access control, s
 ```
 NexCart/
 └── nexcart-demo/
-    ├── nexcart-frontend/   # React + Vite frontend
-    └── nexcart-backend/    # Express + MongoDB backend
+    ├── nexcart-frontend/       # React + Vite frontend
+    │   ├── src/
+    │   │   ├── api/            # API client modules
+    │   │   ├── components/     # UI components (admin / customer / merchant / common)
+    │   │   ├── hooks/          # Custom React hooks
+    │   │   ├── pages/          # Page-level components
+    │   │   └── utils/          # Helpers (token, guards, format)
+    │   ├── .env
+    │   └── vite.config.js
+    │
+    └── nexcart-backend/        # Express + MongoDB backend
+        ├── src/
+        │   ├── config/         # DB connection & app config
+        │   ├── middleware/      # Auth & role middleware
+        │   ├── models/         # Mongoose models (User, Product, Order, Cart, Alert)
+        │   ├── routes/         # Route handlers
+        │   ├── services/       # Auth, logging, notification, storage services
+        │   └── server.js       # Entry point
+        ├── scripts/            # Database seed scripts
+        └── .env
 ```
 
 ## Prerequisites
@@ -36,7 +54,7 @@ cd nexcart-demo/nexcart-backend
 npm install
 ```
 
-Create a `.env` file in the `nexcart-backend` folder (or edit the existing one):
+Verify the `.env` file exists at `nexcart-demo/nexcart-backend/.env`. Default values:
 
 ```env
 PORT=4000
@@ -52,12 +70,11 @@ AWS_USE_S3=false
 AWS_USE_SNS=false
 AWS_USE_CLOUDWATCH=false
 AWS_USE_COGNITO=false
-```
 
-(Optional) Seed the database with default users:
-
-```bash
-npm run seed
+AWS_S3_BUCKET=
+AWS_SNS_TOPIC_ARN=
+AWS_COGNITO_USER_POOL_ID=
+AWS_COGNITO_CLIENT_ID=
 ```
 
 ### 2. Frontend
@@ -65,6 +82,23 @@ npm run seed
 ```bash
 cd nexcart-demo/nexcart-frontend
 npm install
+```
+
+Verify the `.env` file exists at `nexcart-demo/nexcart-frontend/.env`. Default values:
+
+```env
+VITE_API_BASE_URL=http://localhost:4000/api
+
+VITE_AWS_REGION=us-east-1
+
+VITE_USE_AWS_API_GATEWAY=false
+VITE_AWS_API_GATEWAY_URL=
+
+VITE_USE_AWS_COGNITO=false
+VITE_AWS_COGNITO_USER_POOL_ID=
+VITE_AWS_COGNITO_CLIENT_ID=
+
+VITE_AWS_S3_PUBLIC_BASE_URL=
 ```
 
 ---
@@ -95,6 +129,21 @@ Frontend will be available at: `http://localhost:5173`
 
 ---
 
+## Seed the Database (Optional)
+
+Populate the database with sample data:
+
+```bash
+cd nexcart-demo/nexcart-backend
+
+npm run seed:users       # Create default users for all roles
+npm run seed:products    # Add sample products
+npm run seed:orders      # Add sample orders
+npm run seed:alerts      # Add sample admin alerts
+```
+
+---
+
 ## User Roles
 
 | Role | Access |
@@ -114,16 +163,23 @@ Frontend will be available at: `http://localhost:5173`
 | `/api/customer` | Cart and order operations (consumer) |
 | `/api/merchant` | Product & order management (merchant) |
 | `/api/admin` | Dashboard, user/order/alert management (admin) |
+| `/api/aws` | AWS service integration endpoints |
 
 ---
 
 ## AWS Integration (Optional)
 
-AWS services are disabled by default. Toggle them via `.env`:
+AWS services are disabled by default and can be toggled in `.env`:
 
 ```env
-AWS_USE_S3=true          # File/image storage
-AWS_USE_SNS=true         # Notification alerts
-AWS_USE_CLOUDWATCH=true  # Logging & monitoring
-AWS_USE_COGNITO=true     # Cloud-based authentication
+# Backend
+AWS_USE_S3=true           # File/image storage
+AWS_USE_SNS=true          # Notification alerts
+AWS_USE_CLOUDWATCH=true   # Logging & monitoring
+AWS_USE_COGNITO=true      # Cloud-based authentication
+
+# Frontend
+VITE_USE_AWS_COGNITO=true
+VITE_USE_AWS_API_GATEWAY=true
+VITE_AWS_API_GATEWAY_URL=https://your-api-id.execute-api.us-east-1.amazonaws.com
 ```

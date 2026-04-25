@@ -8,16 +8,24 @@ export const notificationService = {
         subject,
         message,
         meta,
-        topicArn: appConfig.aws.snsTopicArn,
+        topicArn: appConfig.aws.snsTopicArn
       });
-      return { provider: "sns", success: true };
+
+      return {
+        provider: "sns",
+        success: true
+      };
     }
 
     loggingService.info("Local alert notification", {
       subject,
       message,
-      meta,
+      meta
     });
-    return { provider: "local", success: true };
-  },
+
+    return {
+      provider: "local",
+      success: true
+    };
+  }
 };

@@ -9,8 +9,8 @@ dotenv.config({
   path: path.resolve(__dirname, "../.env"),
 });
 
-import { connectDB } from "../config/db.js";
-import { Alert } from "../models/Alert.js";
+import { connectDB } from "../src/config/db.js";
+import { Alert } from "../src/models/Alert.js";
 
 const alertSeeds = [
   {

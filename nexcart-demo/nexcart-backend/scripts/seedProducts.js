@@ -9,9 +9,9 @@ dotenv.config({
   path: path.resolve(__dirname, "../.env"),
 });
 
-import { connectDB } from "../config/db.js";
-import { User } from "../models/User.js";
-import { Product } from "../models/Product.js";
+import { connectDB } from "../src/config/db.js";
+import { User } from "../src/models/User.js";
+import { Product } from "../src/models/Product.js";
 
 const productSeeds = [
   {

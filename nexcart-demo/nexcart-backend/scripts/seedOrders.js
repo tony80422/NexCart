@@ -9,10 +9,10 @@ dotenv.config({
   path: path.resolve(__dirname, "../.env"),
 });
 
-import { connectDB } from "../config/db.js";
-import { User } from "../models/User.js";
-import { Product } from "../models/Product.js";
-import { Order } from "../models/Order.js";
+import { connectDB } from "../src/config/db.js";
+import { User } from "../src/models/User.js";
+import { Product } from "../src/models/Product.js";
+import { Order } from "../src/models/Order.js";
 
 // 随机工具
 function randomInt(min, max) {

@@ -7,23 +7,23 @@ export const storageService = {
       loggingService.info("S3-ready upload requested", {
         fileName,
         contentType,
-        bucket: appConfig.aws.s3Bucket,
+        bucket: appConfig.aws.s3Bucket
       });
 
       return {
         provider: "s3",
-        url: `https://${appConfig.aws.s3Bucket}.s3.${appConfig.aws.region}.amazonaws.com/${fileName}`,
+        url: `https://${appConfig.aws.s3Bucket}.s3.${appConfig.aws.region}.amazonaws.com/${fileName}`
       };
     }
 
     loggingService.info("Local storage upload requested", {
       fileName,
-      contentType,
+      contentType
     });
 
     return {
       provider: "local",
-      url: `/uploads/${fileName}`,
+      url: `/uploads/${fileName}`
     };
-  },
+  }
 };

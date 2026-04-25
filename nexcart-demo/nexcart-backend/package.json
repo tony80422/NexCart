@@ -2,10 +2,14 @@
   "name": "nexcart-backend",
   "version": "1.0.0",
   "type": "module",
-  "main": "server.js",
+  "main": "src/server.js",
   "scripts": {
-    "start": "node server.js",
-    "seed": "node scripts/seedUsers.js"
+    "start": "node src/server.js",
+    "dev": "node src/server.js",
+    "seed:users": "node scripts/seedUsers.js",
+    "seed:products": "node scripts/seedProducts.js",
+    "seed:orders": "node scripts/seedOrders.js",
+    "seed:alerts": "node scripts/seedAlerts.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

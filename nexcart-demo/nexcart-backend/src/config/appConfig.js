@@ -22,6 +22,6 @@ export const appConfig = {
     s3Bucket: process.env.AWS_S3_BUCKET || "",
     snsTopicArn: process.env.AWS_SNS_TOPIC_ARN || "",
     cognitoUserPoolId: process.env.AWS_COGNITO_USER_POOL_ID || "",
-    cognitoClientId: process.env.AWS_COGNITO_CLIENT_ID || "",
-  },
+    cognitoClientId: process.env.AWS_COGNITO_CLIENT_ID || ""
+  }
 };

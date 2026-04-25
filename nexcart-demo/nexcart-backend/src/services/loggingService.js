@@ -8,10 +8,11 @@ function logToConsole(level, message, meta = {}) {
 export const loggingService = {
   info(message, meta = {}) {
     if (appConfig.aws.useCloudWatch) {
-      // Future: send logs to CloudWatch
+      // Future: send logs to AWS CloudWatch
       logToConsole("info", `[CloudWatch-ready] ${message}`, meta);
       return;
     }
+
     logToConsole("info", message, meta);
   },
 
@@ -20,6 +21,7 @@ export const loggingService = {
       logToConsole("warn", `[CloudWatch-ready] ${message}`, meta);
       return;
     }
+
     logToConsole("warn", message, meta);
   },
 
@@ -28,6 +30,7 @@ export const loggingService = {
       logToConsole("error", `[CloudWatch-ready] ${message}`, meta);
       return;
     }
+
     logToConsole("error", message, meta);
-  },
+  }
 };

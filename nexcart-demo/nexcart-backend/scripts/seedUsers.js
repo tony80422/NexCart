@@ -9,9 +9,9 @@ dotenv.config({
   path: path.resolve(__dirname, "../.env"),
 });
 
-import { connectDB } from "../config/db.js";
-import { User } from "../models/User.js";
-import { authProvider } from "../services/authProvider.js";
+import { connectDB } from "../src/config/db.js";
+import { User } from "../src/models/User.js";
+import { authProvider } from "../src/services/authProvider.js";
 
 const firstNames = ["Emma", "Liam", "Olivia", "Noah", "Ava", "Lucas", "Sophia", "Mason"];
 const lastNames = ["Carter", "Smith", "Brown", "Lee", "Wilson", "Taylor", "Wong", "Lin"];

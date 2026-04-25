@@ -6,10 +6,10 @@ import { loggingService } from "./services/loggingService.js";
 
 import authRoutes from "./routes/authRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
-
 import customerRoutes from "./routes/customerRoutes.js";
 import merchantRoutes from "./routes/merchantRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
+import awsRoutes from "./routes/awsRoutes.js";
 
 const app = express();
 
@@ -25,8 +25,8 @@ app.get("/api/health", (_req, res) => {
       useS3: appConfig.aws.useS3,
       useSns: appConfig.aws.useSns,
       useCloudWatch: appConfig.aws.useCloudWatch,
-      useCognito: appConfig.aws.useCognito,
-    },
+      useCognito: appConfig.aws.useCognito
+    }
   });
 });
 
@@ -35,6 +35,7 @@ app.use("/api/products", productRoutes);
 app.use("/api/customer", customerRoutes);
 app.use("/api/merchant", merchantRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/aws", awsRoutes);
 
 connectDB().then(() => {
   app.listen(appConfig.port, () => {
